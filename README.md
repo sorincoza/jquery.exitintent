@@ -1,3 +1,10 @@
+This is a fork with improvements from https://github.com/flaviovs/jquery.exitintent
+
+This version fixes the issue of false negatives (it was not triggered if the scroll > 0). Instead we use simply $(document).mouseleave to trigger the popup.
+
+
+
+
 jQuery Exit Intent Plugin
 =========================
 

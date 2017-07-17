@@ -1,10 +1,13 @@
 (function ($) {
+	if (!$) {
+		console.error( 'jquery.exitintent.js plugin needs jQuery to work; skipping it...' );
+		return;
+	}
+
+
 	var timer;
 
 	function trackLeave(ev) {
-		if (ev.pageY > 0) {
-			return;
-		}
 
 		if (timer) {
 			clearTimeout(timer);
@@ -33,19 +36,19 @@
 		$.exitIntent.settings = $.extend($.exitIntent.settings, options);
 
 		if (enable == 'enable') {
-			$(window).mouseleave(trackLeave);
-			$(window).mouseenter(trackEnter);
+			$(document).mouseleave(trackLeave);
+			$(document).mouseenter(trackEnter);
 		} else if (enable == 'disable') {
 			trackEnter(); // Turn off any outstanding timer
-			$(window).unbind('mouseleave', trackLeave);
-			$(window).unbind('mouseenter', trackEnter);
+			$(document).unbind('mouseleave', trackLeave);
+			$(document).unbind('mouseenter', trackEnter);
 		} else {
 			throw "Invalid parameter to jQuery.exitIntent -- should be 'enable'/'disable'";
 		}
-	}
+	};
 
 	$.exitIntent.settings = {
 		'sensitivity': 300
 	};
 
-})(jQuery);
+})(typeof jQuery!=='undefined' ? jQuery : false);
